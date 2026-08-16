@@ -127,10 +127,6 @@ Start with [the architecture](docs/ARCHITECTURE.md), then read the
 > testing with typed configuration, parallel-safe data, automatic failure artifacts, and GitHub
 > Actions quality gates.
 
-Useful interview discussion points: why mutation is opt-in, why API clients do not hide
-assertions, how response drift is detected, how API setup/cleanup makes UI journeys faster, and
-how the suite would be split across pull-request, deployment, and scheduled pipelines.
-
 ## Project history
 
 This branch preserves both original repositories as parents in the Git graph. The former
