@@ -1,0 +1,100 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "playwright-quality-framework"
+version = "1.0.0"
+description = "Production-style UI and API automation framework using Playwright Python and pytest"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Prashant Singh" }]
+keywords = ["playwright", "pytest", "test-automation", "api-testing", "sdet"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Framework :: Pytest",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = [
+  "Faker>=37,<40",
+  "playwright>=1.54,<2",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.10,<3",
+  "pytest>=8.4,<10",
+  "pytest-playwright>=0.8,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.16,<2",
+  "pre-commit>=4.2,<5",
+  "pytest-cov>=6.2,<8",
+  "pytest-html>=4.1,<5",
+  "pytest-xdist>=3.8,<4",
+  "ruff>=0.12,<1",
+]
+
+[project.urls]
+Repository = "https://github.com/PrashantSinghT99/playwright-python"
+Target = "https://github.com/mwinteringham/restful-booker-platform"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/quality_framework"]
+
+[tool.pytest.ini_options]
+minversion = "8.4"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = [
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
+  "--tb=short",
+  "--output=test-results",
+  "--tracing=retain-on-failure",
+  "--screenshot=only-on-failure",
+  "--video=retain-on-failure",
+]
+xfail_strict = true
+markers = [
+  "api: service-level checks through the public API proxy",
+  "contract: response-schema and compatibility checks",
+  "e2e: behavior that crosses UI and API boundaries",
+  "mutation: creates or changes target-application data and is skipped by default",
+  "smoke: small deployment-confidence suite",
+  "ui: browser-level checks",
+  "unit: fast checks with no network or browser",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["legacy"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "PT", "RUF"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["quality_framework"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["quality_framework"]
+exclude = "^(legacy|tests)/"
+plugins = ["pydantic.mypy"]
+
+[tool.coverage.run]
+branch = true
+source = ["quality_framework"]
+omit = ["src/quality_framework/ui/*"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = true
