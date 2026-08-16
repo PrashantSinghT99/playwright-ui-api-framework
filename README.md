@@ -127,6 +127,14 @@ Start with [the architecture](docs/ARCHITECTURE.md), then read the
 > testing with typed configuration, parallel-safe data, automatic failure artifacts, and GitHub
 > Actions quality gates.
 
+## Companion technology stack
+
+### [SauceDemo Automation Framework](https://github.com/PrashantSinghT99/selenium-java-automation)
+
+A production-grade Selenium Java automation framework featuring both **Web UI** and **API** test
+automation, built with industry best practices including Page Object Model, layered architecture,
+parallel execution, and integrated reporting.
+
 ## Project history
 
 This branch preserves both original repositories as parents in the Git graph. The former
