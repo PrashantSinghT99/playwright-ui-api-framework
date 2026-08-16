@@ -120,13 +120,6 @@ Start with [the architecture](docs/ARCHITECTURE.md), then read the
 [test strategy](docs/TEST_STRATEGY.md), [local target guide](docs/LOCAL_TARGET.md), and
 [migration record](docs/MIGRATION.md).
 
-## Resume-ready summary
-
-> Designed and implemented a scalable Playwright Python/pytest quality engineering framework for
-> an open-source microservice application, combining UI, REST API, contract, and cross-layer
-> testing with typed configuration, parallel-safe data, automatic failure artifacts, and GitHub
-> Actions quality gates.
-
 ## Companion technology stack
 
 ### [SauceDemo Automation Framework](https://github.com/PrashantSinghT99/selenium-java-automation)
