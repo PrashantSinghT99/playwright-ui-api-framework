@@ -134,7 +134,7 @@ Start with [the architecture](docs/ARCHITECTURE.md), then read the
 [test strategy](docs/TEST_STRATEGY.md), [local target guide](docs/LOCAL_TARGET.md), and
 [migration record](docs/MIGRATION.md). Contributors can follow the practical
 [adding-a-test guide](docs/ADDING_A_TEST.md) for the supported extension patterns. The
-[engineering decision log](DECISIONS.md) records the rationale and trade-offs behind the design.
+[engineering decision log](docs/DECISIONS.md) records the rationale and trade-offs behind the design.
 
 ## Companion technology stack
 

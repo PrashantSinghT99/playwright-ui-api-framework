@@ -400,4 +400,4 @@ rationale above.
 | `src/quality_framework/polling.py` | Provide one bounded eventual-consistency primitive | D013 |
 | `tests/unit/test_polling.py` | Verify polling recovery and timeout diagnostics | D013, D014 |
 | `tests/e2e/test_booking_journey.py` | Replace fixed sleeping with bounded polling at the UI-to-API boundary | D012, D013 |
-| `DECISIONS.md` | Preserve the session’s decisions, rationale, trade-offs, verification, and commit map | D001–D020 |
+| `docs/DECISIONS.md` | Preserve the session’s decisions, rationale, trade-offs, verification, and commit map | D001–D020 |
