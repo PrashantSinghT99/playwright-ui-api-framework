@@ -1,5 +1,4 @@
 from datetime import date
-from time import sleep
 
 import pytest
 from playwright.sync_api import Page
@@ -8,6 +7,7 @@ from quality_framework.api import RestfulBookerApi, expect_status
 from quality_framework.api.models import Booking, Bookings, Rooms
 from quality_framework.config import Settings
 from quality_framework.data import BookingFactory
+from quality_framework.polling import poll_until
 from quality_framework.ui import ReservationPage
 
 pytestmark = [pytest.mark.e2e, pytest.mark.mutation]
@@ -41,11 +41,11 @@ def test_ui_booking_is_observable_and_cleanable_through_api(
 
 
 def _wait_for_booking(client: RestfulBookerApi, expected: Booking) -> Booking:
-    for _ in range(10):
+    def find_booking() -> Booking | None:
         response = client.get_bookings(expected.room_id)
         if response.status == 200:
             bookings = Bookings.model_validate(response.json()).bookings
-            match = next(
+            return next(
                 (
                     booking
                     for booking in bookings
@@ -54,7 +54,14 @@ def _wait_for_booking(client: RestfulBookerApi, expected: Booking) -> Booking:
                 ),
                 None,
             )
-            if match is not None:
-                return match
-        sleep(0.5)
-    pytest.fail("UI-created booking did not become observable through the API")
+        return None
+
+    try:
+        return poll_until(
+            find_booking,
+            timeout_seconds=5,
+            interval_seconds=0.5,
+            description="UI-created booking to become observable through the API",
+        )
+    except TimeoutError as error:
+        pytest.fail(str(error), pytrace=False)

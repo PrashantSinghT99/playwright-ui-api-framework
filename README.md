@@ -1,6 +1,6 @@
 # Playwright Python Quality Engineering Framework
 
-[![Quality Engineering CI](https://github.com/PrashantSinghT99/playwright-python/actions/workflows/quality.yml/badge.svg)](https://github.com/PrashantSinghT99/playwright-python/actions/workflows/quality.yml)
+[![Quality Engineering CI](https://github.com/PrashantSinghT99/playwright-ui-api-framework/actions/workflows/quality.yml/badge.svg)](https://github.com/PrashantSinghT99/playwright-ui-api-framework/actions/workflows/quality.yml)
 
 A production-style UI, API, and cross-layer test automation framework built with Python,
 Playwright, pytest, and typed executable contracts. It consolidates two earlier learning
@@ -24,12 +24,23 @@ configuration.
 | Parallel safety | Per-worker contexts and unique, recognizable synthetic data |
 | Mutation safety | Data-changing tests skipped unless `--run-mutation` is explicit |
 | Failure analysis | Retained-on-failure trace/video, screenshots, HTML and JUnit reports |
-| Engineering gates | Ruff formatting/lint, strict mypy, pytest, coverage, Dependabot |
+| Engineering gates | Ruff, strict mypy, pytest, coverage, locked dependencies, pip-audit, Dependabot |
 | CI scale | Python matrix plus independently runnable API and browser jobs |
 
 ## Quick start
 
 Python 3.11+ is required. Python 3.12 is the primary development version.
+
+### Reproducible setup with uv
+
+```bash
+uv sync --extra dev
+uv run playwright install chromium
+uv run pytest -m smoke --browser chromium
+```
+
+The committed `uv.lock` resolves application and development dependencies to reviewed versions.
+The standard `venv` and `pip` workflow remains available when `uv` is not installed.
 
 ### PowerShell
 
@@ -116,9 +127,14 @@ docs/             # Architecture, test strategy, implementation, migration
 legacy/           # Temporary review snapshot of the former learning tree
 ```
 
+Framework-owned pytest fixtures are split across `src/quality_framework/pytest_plugins/`; the root
+`tests/conftest.py` is intentionally only a small composition root.
+
 Start with [the architecture](docs/ARCHITECTURE.md), then read the
 [test strategy](docs/TEST_STRATEGY.md), [local target guide](docs/LOCAL_TARGET.md), and
-[migration record](docs/MIGRATION.md).
+[migration record](docs/MIGRATION.md). Contributors can follow the practical
+[adding-a-test guide](docs/ADDING_A_TEST.md) for the supported extension patterns. The
+[engineering decision log](DECISIONS.md) records the rationale and trade-offs behind the design.
 
 ## Companion technology stack
 

@@ -76,6 +76,7 @@ should answer:
 
 - Ruff format and lint pass.
 - Strict mypy passes for framework code.
+- The dependency lock is current and the vulnerability audit passes.
 - Unit suite passes without network access.
 - API and UI tests collect without warnings.
 - At least Chromium smoke is exercised against a known target.

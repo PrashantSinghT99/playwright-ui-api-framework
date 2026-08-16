@@ -34,3 +34,11 @@ def test_room_filter_accepts_a_stay_window(
     response = expect_status(api_client.get_rooms(*future_stay), 200)
 
     Rooms.model_validate(response.json())
+
+
+@pytest.mark.xfail(
+    reason="known target defect: an unknown room currently returns 500 instead of 404",
+    strict=True,
+)
+def test_unknown_room_returns_not_found(api_client: RestfulBookerApi) -> None:
+    expect_status(api_client.get_room(2_147_483_647), 404)

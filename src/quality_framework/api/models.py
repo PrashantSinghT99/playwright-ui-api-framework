@@ -1,8 +1,9 @@
 """Executable API contracts for Restful Booker Platform."""
 
 from datetime import date
+from typing import Self
 
-from pydantic import BaseModel, ConfigDict, Field, PositiveInt
+from pydantic import BaseModel, ConfigDict, Field, PositiveInt, model_validator
 
 
 class ContractModel(BaseModel):
@@ -29,6 +30,12 @@ class Rooms(ContractModel):
 class BookingDates(ContractModel):
     checkin: date
     checkout: date
+
+    @model_validator(mode="after")
+    def checkout_must_follow_checkin(self) -> Self:
+        if self.checkout <= self.checkin:
+            raise ValueError("checkout must be after checkin")
+        return self
 
 
 class Booking(ContractModel):

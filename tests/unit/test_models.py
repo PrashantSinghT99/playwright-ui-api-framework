@@ -37,3 +37,10 @@ def test_contract_rejects_unexpected_fields() -> None:
             bookingdates=BookingDates(checkin=date(2027, 1, 1), checkout=date(2027, 1, 3)),
             unexpected="drift",  # type: ignore[call-arg]
         )
+
+
+def test_booking_dates_require_checkout_after_checkin() -> None:
+    boundary = date(2027, 1, 1)
+
+    with pytest.raises(ValidationError, match="checkout must be after checkin"):
+        BookingDates(checkin=boundary, checkout=boundary)

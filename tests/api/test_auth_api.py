@@ -22,6 +22,12 @@ def test_protected_booking_route_requires_authentication(api_client: RestfulBook
     assert ErrorResponse.model_validate(response.json()).error == "Authentication required"
 
 
+def test_booking_detail_requires_authentication(api_client: RestfulBookerApi) -> None:
+    response = api_client.get_booking(2_147_483_647)
+
+    expect_status(response, 403)
+
+
 @pytest.mark.smoke
 def test_admin_can_read_bookings(
     api_client: RestfulBookerApi,

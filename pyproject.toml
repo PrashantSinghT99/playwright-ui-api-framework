@@ -12,7 +12,7 @@ license = { text = "MIT" }
 authors = [{ name = "Prashant Singh" }]
 keywords = ["playwright", "pytest", "test-automation", "api-testing", "sdet"]
 classifiers = [
-  "Development Status :: 5 - Production/Stable",
+  "Development Status :: 4 - Beta",
   "Framework :: Pytest",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
@@ -32,6 +32,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
   "mypy>=1.16,<2",
+  "pip-audit>=2.9,<3",
   "pre-commit>=4.2,<5",
   "pytest-cov>=6.2,<8",
   "pytest-html>=4.1,<5",
@@ -40,7 +41,7 @@ dev = [
 ]
 
 [project.urls]
-Repository = "https://github.com/PrashantSinghT99/playwright-python"
+Repository = "https://github.com/PrashantSinghT99/playwright-ui-api-framework"
 Target = "https://github.com/mwinteringham/restful-booker-platform"
 
 [tool.hatch.build.targets.wheel]
@@ -92,7 +93,10 @@ plugins = ["pydantic.mypy"]
 [tool.coverage.run]
 branch = true
 source = ["quality_framework"]
-omit = ["src/quality_framework/ui/*"]
+omit = [
+  "src/quality_framework/pytest_plugins/*",
+  "src/quality_framework/ui/*",
+]
 
 [tool.coverage.report]
 fail_under = 85

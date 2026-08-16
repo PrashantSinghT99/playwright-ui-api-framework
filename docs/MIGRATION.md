@@ -43,7 +43,7 @@ pre-modernization commits.
 
 ## Recommended remote decision
 
-Keep `playwright-python` as the surviving GitHub repository, update its description/topics, and
+Keep the renamed `playwright-ui-api-framework` repository as the surviving GitHub repository, update its description/topics, and
 archive or delete `api-playwright-python` only after the modernization branch is merged and visible
 remotely. A repository redirect is preferable to immediate deletion if existing resume links may
 still be in circulation.

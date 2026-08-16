@@ -68,14 +68,17 @@ order.
 
 ### Pytest composition
 
-`tests/conftest.py` owns lifecycle and policy:
+`tests/conftest.py` loads focused, framework-owned plugins instead of becoming a large fixture
+module. The plugins separately own policy, configuration, browser defaults, API lifecycles, and
+test data:
 
 - a session API context per worker;
 - a fresh browser context/page per UI test from the Playwright plugin;
 - authenticated client composition;
-- cleanup registries;
+- idempotent cleanup registries;
 - deterministic future booking windows;
-- mutation opt-in at collection time.
+- mutation opt-in at collection time;
+- one assertion-timeout policy applied per worker.
 
 ## Dependency rules
 
